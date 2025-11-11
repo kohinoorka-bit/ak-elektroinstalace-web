@@ -1,0 +1,212 @@
+body {
+  margin: 0;
+  font-family: 'Lato', Arial, sans-serif;
+  background: #e0f1ff;
+  color: #113045;
+}
+
+header {
+  background: #c3ddfc;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 40px;
+  box-shadow: 0 4px 16px #b2cced44;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 18px;
+}
+.logo-stack svg:first-child {
+  margin-bottom: -6px;
+}
+
+.logo span {
+  color: #fc7a16;
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  display: block;
+  white-space: nowrap;
+}
+
+nav a {
+  color: #1a2a59;
+  text-decoration: none;
+  margin-left: 24px;
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #fc7a16;
+}
+
+.hero {
+  padding: 75px 20px 55px 20px;
+  text-align: center;
+  background: linear-gradient(120deg, #e0f1ff 60%, #c3ddfc 100%);
+  border-bottom: 2px solid #fc7a1655;
+}
+.hero h1 {
+  font-size: 2.2rem;
+  color: #fc7a16;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 1.17rem;
+  margin-bottom: 28px;
+  color: #1a2a59;
+}
+.cta-btn {
+  background: #fc7a16;
+  color: #fff;
+  padding: 15px 32px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 2px 8px #fc7a1633;
+  border: none;
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+}
+.cta-btn:hover {
+  background: #ae5300;
+  color: #fffde3;
+}
+
+.services {
+  max-width: 650px;
+  margin: 46px auto 0 auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #b2cced22;
+  border-left: 6px solid #fc7a16;
+}
+.services h2 {
+  margin-top: 0;
+  color: #fc7a16;
+  text-align: center;
+}
+.services ul {
+  padding: 0;
+  margin: 18px 0 0 0;
+  list-style: none;
+}
+.services li {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  padding-left: 0.3em;
+  position: relative;
+  color: #20557f;
+}
+.services li:before {
+  content: '🔌';
+  color: #fc7a16;
+  margin-right: 10px;
+}
+
+.about {
+  max-width: 630px;
+  margin: 46px auto 0 auto;
+  padding: 30px;
+  background: #fafbff;
+  border-radius: 12px;
+  border-left: 6px solid #fc7a16;
+}
+.about h2 {
+  text-align: center;
+  color: #fc7a16;
+  margin-top: 0;
+}
+.team {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 26px;
+}
+.team div {
+  background: #e0f1ff;
+  padding: 20px 16px 12px 16px;
+  border-radius: 10px;
+  flex: 1 1 0px;
+  margin: 0 12px;
+  text-align: center;
+  box-shadow: 0 2px 16px #b2cced1a;
+}
+.team h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #20557f;
+}
+.team p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #20557f;
+}
+
+.contact {
+  max-width: 430px;
+  margin: 46px auto 0 auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  border-left: 6px solid #fc7a16;
+  margin-bottom: 60px;
+  box-shadow: 0 2px 16px #b2cced22;
+}
+.contact h2 {
+  color: #fc7a16;
+  text-align: center;
+}
+.contact-details {
+  margin-bottom: 28px;
+}
+.contact-details a {
+  color: #20557f;
+  text-decoration: underline;
+  font-weight: 700;
+}
+/* Zvýraznění např. IČO */
+.highlighted {
+  color: #fc7a16;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.footer-slogan {
+  text-align: center;
+  margin-top: 16px;
+  color: #20557f;
+  font-size: 1rem;
+  font-style: italic;
+}
+@media (max-width: 760px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 10px;
+  }
+  .logo {
+    margin-bottom: 8px;
+  }
+  .team {
+    flex-direction: column;
+  }
+  .team div {
+    margin: 12px 0;
+  }
+  .services, .about, .contact { padding: 18px; }
+}
