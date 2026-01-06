@@ -1,63 +1,199 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AK Elektroinstalace</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- PDF.js knihovna -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+  <style>
+    .pdf-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .pdf-thumb {
+      width: 200px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .pdf-thumb canvas {
+      width: 100%;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .pdf-thumb canvas:hover {
+      transform: scale(1.05);
+      border-color: #fc7a16;
+    }
+    .pdf-thumb p {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+    }
+    .modal-content {
+      position: relative;
+      margin: auto;
+      top: 5%;
+      width: 90%;
+      height: 90%;
+      background: #000;
+    }
+    .modal-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:20px 0;">
-      <a class="brand" href="index.html" aria-label="AK Elektroinstalace – domů" style="text-decoration:none; color:inherit; display:flex; gap:12px; align-items:center;">
-        <svg width="44" height="44" viewBox="0 0 52 52" aria-hidden="true"><polyline points="10,28 26,12 42,28" fill="none" stroke="#fc7a16" stroke-width="2"/><rect x="18" y="28" width="16" height="14" fill="none" stroke="#fc7a16" stroke-width="2"/></svg>
-        <div>
-          <div style="font-weight:700">AK Elektroinstalace</div>
-          <div style="font-size:0.85rem; color:#6b7280">Služby a ceník</div>
-        </div>
-      </a>
-
-      <nav>
-        <a href="#sluzby">Služby</a>
-        <a href="#tym">Tým</a>
-        <a href="#certifikaty">Certifikáty</a>
-        <a href="#kontakt">Kontakt</a>
-        <a href="cennik.html">Ceník</a>
-        <a href="cennik.html#pohotovost">Pohotovost</a>
-      </nav>
+    <div class="logo">
+      <div class="logo-stack">
+        <svg width="52" height="52" viewBox="0 0 52 52">
+          <polyline points="10,28 26,12 42,28" fill="none" stroke="#fc7a16" stroke-width="2"/>
+          <rect x="18" y="28" width="16" height="14" fill="none" stroke="#fc7a16" stroke-width="2"/>
+          <polygon points="28,16 18,34 26,34 23,44 38,24 28,24" fill="#fc7a16" stroke="#fff" stroke-width="1"/>
+        </svg>
+        <svg width="42" height="34" viewBox="0 0 40 34" style="margin-top: -6px;">
+          <rect x="3" y="8" width="30" height="14" rx="2" fill="#377efd" stroke="#fc7a16" stroke-width="2"/>
+          <line x1="3" y1="13" x2="33" y2="13" stroke="#fff" stroke-width="1"/>
+          <line x1="3" y1="18" x2="33" y2="18" stroke="#fff" stroke-width="1"/>
+          <line x1="10.5" y1="8" x2="10.5" y2="22" stroke="#fff" stroke-width="1"/>
+          <line x1="19" y1="8" x2="19" y2="22" stroke="#fff" stroke-width="1"/>
+          <line x1="27.5" y1="8" x2="27.5" y2="22" stroke="#fff" stroke-width="1"/>
+          <rect x="15" y="22" width="7" height="6" rx="1.5" fill="#b0bddd" stroke="#666" stroke-width="0.7"/>
+          <rect x="18.2" y="28" width="1.6" height="4" rx="0.5" fill="#666" />
+          <rect x="0" y="32" width="36" height="2" fill="#b5dbf7"/>
+          <circle cx="36" cy="6" r="4" fill="#ffd96c" stroke="#fc7a16" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <span>AK Elektroinstalace</span>
     </div>
+    <nav>
+      <a href="#sluzby">Služby</a>
+      <a href="#tym">Tým</a>
+      <a href="#certifikaty">Certifikáty</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
   </header>
 
-  <main style="max-width:1100px; margin:0 auto; padding:20px;">
-    <h1>AK Elektroinstalace</h1>
-    <p>Poskytujeme komplexní elektroinstalační služby – od revizí, montáží, po servis a pohotovost.</p>
+  <section class="hero">
+    <h1>Spolehlivá a bezpečná instalace,<br>váš klidný spánek</h1>
+    <h1>Varnsdorf a okolí</h1>
+    <p>Profesionální elektroinstalace a moderní řešení pro váš domov i firmu.</p>
+    <a href="#kontakt" class="cta-btn">Nezávazná poptávka</a>
+  </section>
 
-    <section id="sluzby">
-      <h2>Služby</h2>
-      <ul>
-        <li>Kompletní elektroinstalace</li>
-        <li>Revize a opravy</li>
-        <li>Montáž hromosvodů</li>
-        <li>Fotovoltaika (připojení)</li>
-      </ul>
-    </section>
+  <section id="sluzby" class="services">
+    <h2>Naše služby</h2>
+    <ul>
+      <li><strong>Elektroinstalace domů a bytů</strong></li>
+      <li><strong>Instalace hromosvodů</strong></li>
+      <li><strong>Servis a kontrola fotovoltaických elektráren</strong></li>
+      <li><strong>Revize elektroinstalací a zařízení</strong></li>
+      <li><strong>Instalace elektroměrových rozvaděčů</strong></li>
+      <li><strong>Montáž elektrických spotřebičů</strong></li>
+    </ul>
+  </section>
 
-    <section id="tym">
-      <h2>Tým</h2>
-      <p>Náš tým tvoří zkušení elektrikáři s praxí a platnými certifikáty.</p>
-    </section>
+  <section id="tym" class="about">
+    <h2>Náš tým</h2>
+    <div class="team">
+      <div>
+        <h3> Nikola Koháková</h3>
+        <p>Majitelka firmy</p>
+      </div>
+      <div>
+        <h3>Aleš Kohák</h3>
+        <p>Technik firmy</p>
+      </div>
+    </div>
+  </section>
 
-    <section id="certifikaty">
-      <h2>Certifikáty</h2>
-      <p>Máme platné certifikáty a oprávnění pro práci na elektroinstalacích.</p>
-    </section>
+  <section id="certifikaty" class="certificates">
+    <h2>Certifikáty</h2>
+    <div class="pdf-gallery">
+      <div class="pdf-thumb"><canvas id="pdf1"></canvas><p>Vyuční list</p></div>
+      <div class="pdf-thumb"><canvas id="pdf2"></canvas><p>NV 194/2022 osvědčení</p></div>
+      <div class="pdf-thumb"><canvas id="pdf3"></canvas><p>Oprávnění TIČR</p></div>
+      <div class="pdf-thumb"><canvas id="pdf4"></canvas><p>Elektromontér FVE</p></div>
+    </div>
+  </section>
 
-    <section id="kontakt">
-      <h2>Kontakt</h2>
-      <p>Email: info@akelektroinstalace.cz</p>
-      <p>Tel: +420 123 456 789</p>
-    </section>
-  </main>
+  <div id="pdfModal" class="modal" onclick="closePDF(event)">
+    <div class="modal-content">
+      <span class="close" onclick="closePDF(event)">&times;</span>
+      <iframe id="pdfFrame"></iframe>
+    </div>
+  </div>
+
+  <section id="kontakt" class="contact">
+    <h2>Kontaktujte nás</h2>
+    <div class="contact-details">
+      <p><strong>Telefon:</strong> <a href="tel:775071401">775 071 401</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:info@akelektroinstalace.cz">info@akelektroinstalace.cz</a></p>
+      <p><strong>IČO:</strong> <span class="highlighted">11700971</span></p>
+    </div>
+    <p class="footer-slogan">AK Elektroinstalace – Spolehlivá a bezpečná instalace, váš klidný spánek.</p>
+  </section>
+
+  <script>
+    const pdfFiles = [
+      { url: "IMG_0004.pdf", canvasId: "pdf1" },
+      { url: "IMG_0003.pdf", canvasId: "pdf2" },
+      { url: "IMG_0005.pdf", canvasId: "pdf3" },
+      { url: "IMG_0001.pdf", canvasId: "pdf4" }
+    ];
+    function openPDF(url) {
+      document.getElementById("pdfModal").style.display = "block";
+      document.getElementById("pdfFrame").src = url;
+    }
+    function closePDF(event) {
+      if (event.target.classList.contains("modal") || event.target.classList.contains("close")) {
+        document.getElementById("pdfModal").style.display = "none";
+        document.getElementById("pdfFrame").src = "";
+      }
+    }
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+    pdfFiles.forEach(file => {
+      pdfjsLib.getDocument(file.url).promise.then(pdf => pdf.getPage(1)).then(page => {
+        const canvas = document.getElementById(file.canvasId);
+        const context = canvas.getContext("2d");
+        const viewport = page.getViewport({ scale: 0.4 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        const renderContext = { canvasContext: context, viewport: viewport };
+        page.render(renderContext);
+        canvas.addEventListener("click", () => openPDF(file.url));
+      }).catch(err => console.error("Chyba při načítání PDF:", err));
+    });
+  </script>
 </body>
 </html>
