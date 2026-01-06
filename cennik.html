@@ -20,11 +20,11 @@
     header .brand svg{display:block}
     main{max-width:var(--maxw); margin:0 auto; background:var(--card); padding:28px; border-radius:8px; box-shadow:0 6px 20px rgba(16,24,40,0.06);}    
     h1{margin:0 0 8px; font-size:1.6rem;}
-    p.lead{margin:0 0 18px; color:var(--muted);}
+    p.lead{margin:0 0 18px; color:var(--muted);}    
     .price-table{width:100%; border-collapse:collapse; margin-top:12px;}
     .price-table th, .price-table td{padding:12px 14px; border:1px solid #e6e9ef; text-align:left; vertical-align:middle;}
-    .price-table th{background:#fbfbfd; font-weight:700; color:#212529;}
-    .price-table td.small{width:130px; white-space:nowrap;}
+    .price-table th{background:#fbfbfd; font-weight:700; color:#212529;}    
+    .price-table td.small{width:160px; white-space:nowrap;}
     .price-table td.center{ text-align:center; }
     .note{margin-top:12px; color:var(--muted); font-size:0.95rem;}
     .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
@@ -32,6 +32,8 @@
     .btn.secondary{background:#377efd;}
     .search-row{display:flex; gap:8px; margin-top:12px; align-items:center; flex-wrap:wrap;}
     .search-row input{padding:8px 10px; border-radius:6px; border:1px solid #d7dbe6; min-width:220px;}
+    .small-table{width:100%; border-collapse:collapse;}
+    .small-table td, .small-table th{padding:6px 8px; border:1px solid #eef2f6;}
     @media (max-width:700px){
       header{padding:0 8px}
       .price-table th:nth-child(2), .price-table td:nth-child(2){ display:none; } /* skryje popis na malých obrazovkách */
@@ -47,7 +49,6 @@
 <body>
   <header>
     <a class="brand" href="index.html" aria-label="AK Elektroinstalace – domů">
-      <!-- můžete vložit logo SVG -->
       <svg width="44" height="44" viewBox="0 0 52 52" aria-hidden="true"><polyline points="10,28 26,12 42,28" fill="none" stroke="#fc7a16" stroke-width="2"/><rect x="18" y="28" width="16" height="14" fill="none" stroke="#fc7a16" stroke-width="2"/></svg>
       <div>
         <div style="font-weight:700">AK Elektroinstalace</div>
@@ -110,21 +111,31 @@
           <td>Elektrické připojení fotovoltaické instalace (bez dodávky panelů a měniče).</td>
           <td class="small">dohodou</td>
         </tr>
-        <tr>
-          <td>Pohotovost (mimo běžnou pracovní dobu)</td>
+        <!-- Pohotovost block with anchor -->
+        <tr id="pohotovost-row">
+          <td id="pohotovost">Pohotovost (mimo běžnou pracovní dobu)</td>
           <td>
-            Po–Pá 17:00–21:00 — 500 Kč / započatá hodina<br>
-            So 8:00–15:00 — 600 Kč / započatá hodina<br>
-            So 16:00–20:00 — 700 Kč / započatá hodina<br>
-            Ne 8:00–18:00 — 1 000 Kč / započatá hodina
+            <table class="small-table" aria-label="Ceník pohotovosti">
+              <thead>
+                <tr><th>Den / čas</th><th>Sazba (za započatou hodinu)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Po–Pá 17:00–21:00</td><td>500 Kč</td></tr>
+                <tr><td>So 8:00–15:00</td><td>600 Kč</td></tr>
+                <tr><td>So 16:00–20:00</td><td>700 Kč</td></tr>
+                <tr><td>Ne 8:00–18:00</td><td>1 000 Kč</td></tr>
+              </tbody>
+            </table>
           </td>
-          <td class="small">500 / 600 / 700 / 1 000 Kč<br><small>započatá hodina</small></td>
+          <td class="small center">
+            Viz tabulka vlevo – ceny za započatou hodinu
+          </td>
         </tr>
-        <!-- Přidejte další řádky podle potřeby -->
+
       </tbody>
     </table>
 
-    <p id="price-note" class="note">Poznámka: "od" značí orientační cenu pro běžné podmínky. Ceny nezahrnují DPH (pokud se vztahuje) ani případné náklady na speciální materiál nebo komplikované podmínky. Pro přesný rozpočet provedeme prohlídku nebo zašlete popis práce a foto.</p>
+    <p id="price-note" class="note">Poznámka: Ceny jsou orientační a <strong>jsou uvedeny bez DPH a bez materiálu</strong>. Pro ceny včetně DPH nebo včetně materiálu nás prosím kontaktujte – po upřesnění rozsahu prací zašleme kalkulaci se všemi položkami. Ceny konečné se mohou lišit podle náročnosti, použitého materiálu a konkrétních podmínek na místě.</p>
 
     <div class="actions" aria-hidden="false">
       <a class="btn" href="CENIK_AK_Elektroinstalace.pdf" download>Stáhnout ceník (PDF)</a>
