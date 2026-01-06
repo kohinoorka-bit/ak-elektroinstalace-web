@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ceník prací – AK Elektroinstalace</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{
+      --accent:#fc7a16;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --maxw:1100px;
+    }
+    body{font-family: 'Lato', system-ui, Arial, sans-serif; background:var(--bg); color:#111; margin:0; padding:20px;}
+    header{display:flex; align-items:center; justify-content:space-between; max-width:var(--maxw); margin:0 auto 18px; gap:12px;}
+    header .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;}
+    header .brand svg{display:block}
+    main{max-width:var(--maxw); margin:0 auto; background:var(--card); padding:28px; border-radius:8px; box-shadow:0 6px 20px rgba(16,24,40,0.06);}    
+    h1{margin:0 0 8px; font-size:1.6rem;}
+    p.lead{margin:0 0 18px; color:var(--muted);}
+    .price-table{width:100%; border-collapse:collapse; margin-top:12px;}
+    .price-table th, .price-table td{padding:12px 14px; border:1px solid #e6e9ef; text-align:left; vertical-align:middle;}
+    .price-table th{background:#fbfbfd; font-weight:700; color:#212529;}
+    .price-table td.small{width:130px; white-space:nowrap;}
+    .price-table td.center{ text-align:center; }
+    .note{margin-top:12px; color:var(--muted); font-size:0.95rem;}
+    .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+    .btn{display:inline-block; padding:10px 14px; background:var(--accent); color:#fff; text-decoration:none; border-radius:6px; font-weight:700;}
+    .btn.secondary{background:#377efd;}
+    .search-row{display:flex; gap:8px; margin-top:12px; align-items:center; flex-wrap:wrap;}
+    .search-row input{padding:8px 10px; border-radius:6px; border:1px solid #d7dbe6; min-width:220px;}
+    @media (max-width:700px){
+      header{padding:0 8px}
+      .price-table th:nth-child(2), .price-table td:nth-child(2){ display:none; } /* skryje popis na malých obrazovkách */
+    }
+    @media print{
+      body{background:#fff}
+      header nav, .actions, .search-row { display:none !important; }
+      main{box-shadow:none; border-radius:0; padding:0; margin:0;}
+      .price-table th, .price-table td{font-size:12pt}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html" aria-label="AK Elektroinstalace – domů">
+      <!-- můžete vložit logo SVG -->
+      <svg width="44" height="44" viewBox="0 0 52 52" aria-hidden="true"><polyline points="10,28 26,12 42,28" fill="none" stroke="#fc7a16" stroke-width="2"/><rect x="18" y="28" width="16" height="14" fill="none" stroke="#fc7a16" stroke-width="2"/></svg>
+      <div>
+        <div style="font-weight:700">AK Elektroinstalace</div>
+        <div style="font-size:0.85rem; color:#6b7280">Ceník prací</div>
+      </div>
+    </a>
+
+    <nav aria-label="Hlavní navigace" style="display:flex; gap:12px;">
+      <a href="index.html" style="color:var(--muted); text-decoration:none;">Domů</a>
+      <a href="index.html#kontakt" style="color:var(--muted); text-decoration:none;">Kontakt</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Ceník prací (orientačně)</h1>
+    <p class="lead">Níže uvedené ceny jsou orientační. Konečná cena se stanoví podle rozsahu prací, použitého materiálu a specifikace místa instalace. Pro přesnou kalkulaci nás kontaktujte.</p>
+
+    <div class="search-row" role="search" aria-label="Vyhledat položky ceníku">
+      <input id="search" type="search" placeholder="Vyhledat službu (např. revize, hromosvod, fotovoltaika)" />
+      <a class="btn secondary" href="mailto:info@akelektroinstalace.cz?subject=Poptavka%20cenik">Žádat kalkulaci</a>
+      <a class="btn" href="#" onclick="window.print(); return false;">Tisk</a>
+    </div>
+
+    <table class="price-table" aria-describedby="price-note">
+      <thead>
+        <tr>
+          <th>Služba</th>
+          <th>Popis</th>
+          <th class="center">Cena (CZK)</th>
+        </tr>
+      </thead>
+      <tbody id="price-body">
+        <tr>
+          <td>Kompletní elektroinstalace bytu 1+kk</td>
+          <td>Včetně elektrických obvodů, zásuvek, vypínačů, světel. Materiál a rozměr bytu se promítají do konečné ceny.</td>
+          <td class="small">od 18 000 Kč</td>
+        </tr>
+        <tr>
+          <td>Kompletní elektroinstalace bytu 2+kk</td>
+          <td>Standardní provedení, bez spotřebičů a náročných úprav.</td>
+          <td class="small">od 24 000 Kč</td>
+        </tr>
+        <tr>
+          <td>Montáž hromosvodu (rodinný dům)</td>
+          <td>Standardní provedení, včetně zemnicích pásků a svodů.</td>
+          <td class="small">od 6 500 Kč</td>
+        </tr>
+        <tr>
+          <td>Revize elektroinstalace</td>
+          <td>Revize dle platných norem s vydáním protokolu.</td>
+          <td class="small">od 1 200 Kč</td>
+        </tr>
+        <tr>
+          <td>Zapojení elektroměrového rozvaděče</td>
+          <td>Montáž nebo přemístění elektroměrového rozvaděče, včetně připojení.</td>
+          <td class="small">od 3 500 Kč</td>
+        </tr>
+        <tr>
+          <td>Montáž a připojení elektromontáže FVE</td>
+          <td>Elektrické připojení fotovoltaické instalace (bez dodávky panelů a měniče).</td>
+          <td class="small">dohodou</td>
+        </tr>
+        <!-- Přidejte další řádky podle potřeby -->
+      </tbody>
+    </table>
+
+    <p id="price-note" class="note">Poznámka: "od" značí orientační cenu pro běžné podmínky. Ceny nezahrnují DPH (pokud se vztahuje) ani případné náklady na speciální materiál nebo komplikované podmínky. Pro přesný rozpočet provedeme prohlídku nebo zašlete popis práce a foto.</p>
+
+    <div class="actions" aria-hidden="false">
+      <a class="btn" href="CENIK_AK_Elektroinstalace.pdf" download>Stáhnout ceník (PDF)</a>
+      <a class="btn secondary" href="mailto:info@akelektroinstalace.cz?subject=Poptavka%20-%20konkretni%20prace">Požádat o cenovou nabídku</a>
+    </div>
+  </main>
+
+  <script>
+    // Jednoduché filtrování tabulky podle vyhledávání
+    const searchInput = document.getElementById('search');
+    const priceBody = document.getElementById('price-body');
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      Array.from(priceBody.rows).forEach(row => {
+        const text = (row.cells[0].textContent + ' ' + (row.cells[1]?.textContent || '')).toLowerCase();
+        row.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
