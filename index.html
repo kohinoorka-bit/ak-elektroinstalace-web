@@ -99,6 +99,8 @@
       <a href="#sluzby">Služby</a>
       <a href="#tym">Tým</a>
       <a href="#certifikaty">Certifikáty</a>
+      <!-- Odkaz na cennik s id pro JS popup -->
+      <a href="cennik.html" id="openCennik">Cenník</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
   </header>
@@ -195,5 +197,29 @@
       }).catch(err => console.error("Chyba při načítání PDF:", err));
     });
   </script>
+
+  <!-- Script pro otevření cenník jako vyskakovací okno -->
+  <script>
+    (function(){
+      const link = document.getElementById('openCennik');
+      if (!link) return;
+      link.addEventListener('click', function(e) {
+        e.preventDefault(); // zabrání standardnímu chování odkazu
+        const url = this.getAttribute('href');
+        // Nastavení vlastností popup okna
+        const features = 'width=900,height=700,toolbar=no,menubar=no,location=no,status=no,resizable=yes,scrollbars=yes';
+        // Název okna - pokud existuje, další otevření použije stejné okno
+        const winName = 'cennikWindow';
+        const newWin = window.open(url, winName, features);
+        // Pokud prohlížeč popup zablokoval, newWin bude null -> fallback do nového tabu
+        if (!newWin) {
+          window.open(url, '_blank', 'noopener');
+        } else {
+          try { newWin.focus(); newWin.opener = null; } catch (err) { /* ignore */ }
+        }
+      });
+    })();
+  </script>
 </body>
+</html>
 </html>
