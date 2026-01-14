@@ -1,0 +1,104 @@
+.fve-cenik {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: #222;
+}
+
+.fve-cenik h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.fve-cenik .subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.balicek {
+  border: 1px solid #ddd;
+  border-left: 6px solid #4caf50;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.balicek h2 {
+  margin-top: 0;
+}
+
+.balicek .cena {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.balicek ul {
+  padding-left: 20px;
+}
+
+.balicek ul li {
+  margin-bottom: 6px;
+}
+
+.balicek .vhodne {
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+/* Barevné rozlišení balíčků */
+.zakladni { border-left-color: #4caf50; }
+.rozsirený { border-left-color: #2196f3; }
+.kompletni { border-left-color: #ff9800; }
+
+.fve-cenik table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.fve-cenik table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.fve-cenik table td:last-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+.poznamka {
+  margin-top: 30px;
+  font-size: 0.95em;
+  color: #555;
+}
+
+.kontakt {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+}
+
+.kontakt a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.kontakt a:hover {
+  text-decoration: underline;
+}
+
+/* Mobilní zobrazení */
+@media (max-width: 600px) {
+  .balicek {
+    padding: 15px;
+  }
+
+  .balicek .cena {
+    font-size: 1.2em;
+  }
+}
