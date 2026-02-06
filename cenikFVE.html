@@ -2,90 +2,798 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>Ceník FVE</title>
-
-    <!-- TADY SE NAČÍTÁ STYL -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="cenikFVE.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servis FVE - AK Elektroinstalace</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .facebook-post {
+            width: 1200px;
+            max-width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #0a3d62 0%, #1e5799 100%);
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "⚡";
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.08;
+            right: -50px;
+            top: -80px;
+            transform: rotate(15deg);
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 40px;
+            margin-right: 15px;
+            color: #ffd32a;
+        }
+        
+        .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .year-badge {
+            background: #ffd32a;
+            color: #0a3d62;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(255, 211, 42, 0.3);
+        }
+        
+        .packages {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px;
+            gap: 30px;
+        }
+        
+        .package {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .package:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .package-basic {
+            border-top: 8px solid #2ecc71;
+            background: linear-gradient(to bottom, #f9fff9, #f0f9f0);
+        }
+        
+        .package-extended {
+            border-top: 8px solid #3498db;
+            background: linear-gradient(to bottom, #f5fbff, #e8f4ff);
+        }
+        
+        .package-complete {
+            border-top: 8px solid #f39c12;
+            background: linear-gradient(to bottom, #fffbf0, #fef5e7);
+        }
+        
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .package-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+        }
+        
+        .package-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+        }
+        
+        .package-basic .package-price {
+            color: #27ae60;
+        }
+        
+        .package-extended .package-price {
+            color: #2980b9;
+        }
+        
+        .package-complete .package-price {
+            color: #d35400;
+        }
+        
+        .features {
+            list-style-type: none;
+        }
+        
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+        
+        .package-basic .feature-icon {
+            color: #2ecc71;
+        }
+        
+        .package-extended .feature-icon {
+            color: #3498db;
+        }
+        
+        .package-complete .feature-icon {
+            color: #f39c12;
+        }
+        
+        .cta-button {
+            display: block;
+            background: #e74c3c;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            text-decoration: none;
+            margin: 40px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.4);
+        }
+        
+        .additional-info {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 30px 40px;
+            border-top: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .info-box {
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #0a3d62;
+        }
+        
+        .contact {
+            background: #0a3d62;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            text-align: center;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            font-size: 18px;
+        }
+        
+        .phone {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffd32a;
+        }
+        
+        .note {
+            padding: 25px 40px;
+            background: #fff8e1;
+            border-left: 5px solid #ffd32a;
+            margin: 0 40px 40px;
+            border-radius: 0 10px 10px 0;
+            font-size: 18px;
+        }
+        
+        .note strong {
+            color: #e74c3c;
+        }
+        
+        /* Styly pro modální okna */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #e74c3c;
+            background: none;
+            border: none;
+            font-weight: bold;
+        }
+        
+        .modal-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #0a3d62;
+            padding-right: 30px;
+        }
+        
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .services-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 2px solid #0a3d62;
+            color: #0a3d62;
+        }
+        
+        .services-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .services-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .price-cell {
+            font-weight: bold;
+            color: #27ae60;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .modal-icon {
+            font-size: 50px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0a3d62;
+        }
+        
+        .travel-info {
+            background: #e8f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .highlight {
+            background: #fff8e1;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 2px solid #ffd32a;
+        }
+        
+        .highlight-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #0a3d62;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        @media (max-width: 1100px) {
+            .packages {
+                flex-direction: column;
+            }
+            
+            .title {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 25px;
+            }
+            
+            .title {
+                font-size: 30px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .packages, .contact, .additional-info {
+                padding: 25px;
+            }
+            
+            .package {
+                min-width: 100%;
+            }
+            
+            .cta-button, .note {
+                margin: 25px;
+            }
+            
+            .modal-content {
+                padding: 25px;
+            }
+            
+            .modal-title {
+                font-size: 26px;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="facebook-post">
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>AK Elektroinstalace</span>
+            </div>
+            <h1 class="title">Servis Fotovoltaických Elektráren</h1>
+            <p class="subtitle">Profesionální údržba FVE do 10 kWp • Varnsdorf a okolí</p>
+            <div class="year-badge">Platný pro rok 2026</div>
+        </div>
+        
+        <div class="packages">
+            <div class="package package-basic" onclick="openModal('basic')">
+                <div class="package-header">
+                    <h2 class="package-name">ZÁKLADNÍ SERVIS</h2>
+                    <div class="package-price">2 900 Kč</div>
+                </div>
+                <ul class="features">
+                    <li><span class="feature-icon">✓</span> Kontrola panelů a konstrukce</li>
+                    <li><span class="feature-icon">✓</span> Kontrola kabeláže a konektorů MC4</li>
+                    <li><span class="feature-icon">✓</span> Kontrola DC/AC rozvaděčů</li>
+                    <li><span class="feature-icon">✓</span> Kontrola střídače a ochran</li>
+                    <li><span class="feature-icon">✓</span> Dotažení spojů</li>
+                    <li><span class="feature-icon">✓</span> Základní měření stringů</li>
+                    <li><span class="feature-icon">🖱️</span> <strong>Klikněte pro detail</strong></li>
+                </ul>
+            </div>
+            
+            <div class="package package-extended" onclick="openModal('extended')">
+                <div class="package-header">
+                    <h2 class="package-name">ROZŠÍŘENÝ SERVIS</h2>
+                    <div class="package-price">4 900 Kč</div>
+                </div>
+                <ul class="features">
+                    <li><span class="feature-icon">✓</span> Všechno ze Základního servisu</li>
+                    <li><span class="feature-icon">✓</span> Kompletní měření stringů</li>
+                    <li><span class="feature-icon">✓</span> Měření uzemnění</li>
+                    <li><span class="feature-icon">✓</span> Diagnostika střídače (logy, chyby)</li>
+                    <li><span class="feature-icon">✓</span> Kontrola monitoringu</li>
+                    <li><span class="feature-icon">✓</span> Protokol o měření</li>
+                    <li><span class="feature-icon">🖱️</span> <strong>Klikněte pro detail</strong></li>
+                </ul>
+            </div>
+            
+            <div class="package package-complete" onclick="openModal('complete')">
+                <div class="package-header">
+                    <h2 class="package-name">KOMPLETNÍ SERVIS</h2>
+                    <div class="package-price">6 900 Kč</div>
+                </div>
+                <ul class="features">
+                    <li><span class="feature-icon">✓</span> Všechno z Rozšířeného servisu</li>
+                    <li><span class="feature-icon">✓</span> Revizní zpráva</li>
+                    <li><span class="feature-icon">✓</span> Fotodokumentace</li>
+                    <li><span class="feature-icon">✓</span> Kontrola bateriového systému</li>
+                    <li><span class="feature-icon">✓</span> Kontrola nastavení regulací</li>
+                    <li><span class="feature-icon">✓</span> Doporučení pro optimalizaci</li>
+                    <li><span class="feature-icon">🖱️</span> <strong>Klikněte pro detail</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>Důležité:</strong> Servisní prohlídky doporučujeme provádět <strong>jednou ročně</strong>, ideálně <strong>před začátkem sezóny</strong>. Všechny ceny jsou uvedeny včetně DPH. Cestovné 12 Kč/km (počítáno z Varnsdorfu).
+        </div>
+        
+        <div class="additional-info">
+            <div class="info-box" onclick="openModal('additional')">
+                <span class="info-icon">🛠️</span>
+                <h3 class="info-title">Doplňkové služby</h3>
+                <p>Výměna MC4, čištění panelů, diagnostika závad, nouzový výjezd do 24h a další</p>
+                <p style="margin-top: 10px; color: #e74c3c; font-weight: bold;">Klikněte pro zobrazení ceníku</p>
+            </div>
+            
+            <div class="info-box" onclick="openModal('travel')">
+                <span class="info-icon">🚗</span>
+                <h3 class="info-title">Cestovné a dojezd</h3>
+                <p>12 Kč/km z Varnsdorfu</p>
+                <p style="margin-top: 10px; color: #e74c3c; font-weight: bold;">Klikněte pro detail</p>
+            </div>
+            
+            <div class="info-box" onclick="openModal('frequency')">
+                <span class="info-icon">📅</span>
+                <h3 class="info-title">Doporučená frekvence</h3>
+                <p>1x ročně před sezónou</p>
+                <p style="margin-top: 10px; color: #e74c3c; font-weight: bold;">Klikněte pro detail</p>
+            </div>
+        </div>
+        
+        <a href="tel:+420775071401" class="cta-button">
+            ZAVOLEJTE A DOMLUVTE TERMÍN! 📞
+        </a>
+        
+        <div class="contact">
+            <div class="contact-item">
+                <div>Telefon</div>
+                <div class="phone">775 071 401</div>
+            </div>
+            <div class="contact-item">
+                <div>E-mail</div>
+                <div><strong>info@akelektroinstalace.cz</strong></div>
+            </div>
+            <div class="contact-item">
+                <div>Webové stránky</div>
+                <div><strong>akelektroinstalace.cz</strong></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modální okna -->
+    <div id="modal-basic" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('basic')">&times;</button>
+            <div class="modal-icon">🟩</div>
+            <h2 class="modal-title">ZÁKLADNÍ SERVISNÍ PROHLÍDKA - 2 900 Kč</h2>
+            <p>Kompletní základní kontrola vaší fotovoltaické elektrárny:</p>
+            <ul class="features">
+                <li><span class="feature-icon">✓</span> Kontrola panelů a konstrukce</li>
+                <li><span class="feature-icon">✓</span> Kontrola kabeláže a konektorů MC4</li>
+                <li><span class="feature-icon">✓</span> Kontrola DC/AC rozvaděčů</li>
+                <li><span class="feature-icon">✓</span> Kontrola střídače</li>
+                <li><span class="feature-icon">✓</span> Kontrola přepěťových ochran</li>
+                <li><span class="feature-icon">✓</span> Dotažení spojů</li>
+                <li><span class="feature-icon">✓</span> Základní měření stringů</li>
+            </ul>
+            <div class="highlight">
+                <div class="highlight-title">Pro koho je tento balíček vhodný?</div>
+                <p>Pro majitele FVE, kteří chtějí mít jistotu, že jejich systém funguje bez závad a nepotřebují podrobná měření a diagnostiku.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-extended" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('extended')">&times;</button>
+            <div class="modal-icon">🟦</div>
+            <h2 class="modal-title">ROZŠÍŘENÁ SERVISNÍ PROHLÍDKA - 4 900 Kč</h2>
+            <p>Všechno ze základního servisu plus podrobná měření a diagnostika:</p>
+            <ul class="features">
+                <li><span class="feature-icon">✓</span> <strong>Všechny položky ze Základního servisu</strong></li>
+                <li><span class="feature-icon">📊</span> Kompletní měření stringů (napětí, proud, izolační odpor)</li>
+                <li><span class="feature-icon">⚡</span> Měření uzemnění</li>
+                <li><span class="feature-icon">🔍</span> Diagnostika střídače (logy, chyby, teploty)</li>
+                <li><span class="feature-icon">📱</span> Kontrola monitoringu</li>
+                <li><span class="feature-icon">📄</span> Protokol o měření</li>
+            </ul>
+            <div class="highlight">
+                <div class="highlight-title">Pro koho je tento balíček vhodný?</div>
+                <p>Pro majitele FVE, kteří chtějí mít detailní přehled o výkonu a stavu svého systému, včetně podrobné dokumentace.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-complete" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('complete')">&times;</button>
+            <div class="modal-icon">🟨</div>
+            <h2 class="modal-title">KOMPLETNÍ SERVIS + REVIZNÍ ZPRÁVA - 6 900 Kč</h2>
+            <p>Nejkomplexnější servisní balíček včetně revize a optimalizace:</p>
+            <ul class="features">
+                <li><span class="feature-icon">✓</span> <strong>Všechny položky z Rozšířeného servisu</strong></li>
+                <li><span class="feature-icon">📋</span> Revizní zpráva</li>
+                <li><span class="feature-icon">📷</span> Fotodokumentace</li>
+                <li><span class="feature-icon">🔋</span> Kontrola bateriového systému</li>
+                <li><span class="feature-icon">⚙️</span> Kontrola nastavení regulací a limitů</li>
+                <li><span class="feature-icon">🚀</span> Doporučení pro optimalizaci výkonu</li>
+            </ul>
+            <div class="highlight">
+                <div class="highlight-title">Pro koho je tento balíček vhodný?</div>
+                <p>Pro majitele FVE s bateriovým úložištěm nebo pro ty, kteří chtějí mít kompletní dokumentaci a optimalizaci svého systému.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-additional" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('additional')">&times;</button>
+            <div class="modal-icon">🛠️</div>
+            <h2 class="modal-title">DOPLŇKOVÉ SLUŽBY - CENÍK</h2>
+            <p>Ceny jednotlivých doplňkových služeb (včetně DPH):</p>
+            
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Služba</th>
+                        <th>Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Výměna konektoru MC4</td>
+                        <td class="price-cell">150 Kč/ks</td>
+                    </tr>
+                    <tr>
+                        <td>Výměna pojistky</td>
+                        <td class="price-cell">120 Kč/ks</td>
+                    </tr>
+                    <tr>
+                        <td>Čištění panelů</td>
+                        <td class="price-cell">25 Kč/m²</td>
+                    </tr>
+                    <tr>
+                        <td>Kontrola bateriového systému (samostatně)</td>
+                        <td class="price-cell">1 200 Kč</td>
+                    </tr>
+                    <tr>
+                        <td>Aktualizace firmware střídače</td>
+                        <td class="price-cell">500 Kč</td>
+                    </tr>
+                    <tr>
+                        <td>Nouzový výjezd do 24 h</td>
+                        <td class="price-cell">1 500 Kč</td>
+                    </tr>
+                    <tr>
+                        <td>Diagnostika závady bez opravy</td>
+                        <td class="price-cell">900 Kč</td>
+                    </tr>
+                    <tr>
+                        <td>Oprava kabeláže</td>
+                        <td class="price-cell">300-600 Kč/m</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight">
+                <div class="highlight-title">Poznámka</div>
+                <p>Všechny ceny jsou uvedeny včetně DPH. K cenám služeb se připočítává cestovné 12 Kč/km z Varnsdorfu.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-travel" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('travel')">&times;</button>
+            <div class="modal-icon">🚗</div>
+            <h2 class="modal-title">CESTOVNÉ A DOJEZD</h2>
+            
+            <div class="travel-info">
+                <h3 style="color: #0a3d62; margin-bottom: 15px;">Cestovné: 12 Kč/km</h3>
+                <p><strong>Počítáno z Varnsdorfu</strong></p>
+                <p>Vzdálenost se počítá od naší provozovny ve Varnsdorfu k místu instalace FVE a zpět.</p>
+            </div>
+            
+            <div class="highlight">
+                <div class="highlight-title">Příklad výpočtu cestovného</div>
+                <p>Pokud se vaše FVE nachází 20 km od Varnsdorfu:</p>
+                <ul style="margin-top: 10px;">
+                    <li>Vzdálenost: 20 km × 2 (cesta tam i zpět) = 40 km</li>
+                    <li>Cestovné: 40 km × 12 Kč/km = <strong>480 Kč</strong></li>
+                </ul>
+                <p style="margin-top: 15px;">Tato částka se připočte k ceně vybraného servisního balíčku nebo doplňkové služby.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-frequency" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('frequency')">&times;</button>
+            <div class="modal-icon">📅</div>
+            <h2 class="modal-title">DOPORUČENÁ FREKVENCE SERVISU</h2>
+            
+            <div class="highlight">
+                <div class="highlight-title">Proč je pravidelný servis důležitý?</div>
+                <p>Pravidelná údržba FVE zajišťuje:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Maximální výkon a efektivitu systému</li>
+                    <li>Dlouhou životnost komponentů</li>
+                    <li>Bezpečný provoz bez rizika požáru</li>
+                    <li>Zachování záručních podmínek</li>
+                    <li>Včasné odhalení potenciálních problémů</li>
+                </ul>
+            </div>
+            
+            <div style="background: #e8f4ff; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h3 style="color: #0a3d62; margin-bottom: 10px;">🟢 <strong>Doporučená frekvence: 1x ročně</strong></h3>
+                <p><strong>Ideální období: Před začátkem sezóny (únor - březen)</strong></p>
+                <p>Na jaře je nejvhodnější doba pro servis, protože:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Systém je připraven na nejvýkonnější období (jaro/léto)</li>
+                    <li>Je možné odstranit případné závady z zimního období</li>
+                    <li>Systém bude optimalizován pro maximální letní výkon</li>
+                </ul>
+            </div>
+            
+            <div style="margin-top: 25px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                <p><strong>⚠️ Výjimka:</strong> Pokud zaznamenáte pokles výkonu, chybové hlášení nebo jiné anomálie, nečekejte na pravidelný servis a kontaktujte nás okamžitě.</p>
+            </div>
+        </div>
+    </div>
 
-<section class="fve-cenik">
-  <h1>⚡ Ceník servisních prací FVE do 10 kWp</h1>
-  <p class="subtitle">Platný pro rok 2026 – Varnsdorf a okolí</p>
-
-  <div class="balicek zakladni">
-    <h2>🟩 Základní servisní prohlídka</h2>
-    <p class="cena">2 900 Kč</p>
-    <ul>
-      <li>Vizuální kontrola panelů (uchycení, poškození)</li>
-      <li>Kontrola konstrukce a dotažení spojů</li>
-      <li>Kontrola kabeláže, konektorů MC4 a chrániček</li>
-      <li>Kontrola DC a AC rozvaděčů</li>
-      <li>Kontrola střídače a základní diagnostika</li>
-      <li>Kontrola přepěťových ochran</li>
-      <li>Základní měření stringů</li>
-    </ul>
-    <p class="vhodne">Vhodné pro běžné roční kontroly a preventivní údržbu.</p>
-  </div>
-
-  <div class="balicek rozsirený">
-    <h2>🟦 Rozšířená servisní prohlídka + měření</h2>
-    <p class="cena">4 900 Kč</p>
-    <ul>
-      <li>Kompletní měření stringů (napětí, proud, izolační odpor)</li>
-      <li>Měření uzemnění</li>
-      <li>Detailní diagnostika střídače (logy, teploty, chyby)</li>
-      <li>Kontrola monitoringu a komunikace</li>
-      <li>Protokol o měření</li>
-    </ul>
-    <p class="vhodne">Vhodné pro starší FVE, výpadky výroby, požadavek na dokumentaci.</p>
-  </div>
-
-  <div class="balicek kompletni">
-    <h2>🟨 Kompletní servis + revizní zpráva</h2>
-    <p class="cena">6 900 Kč</p>
-    <ul>
-      <li>Vystavení revizní zprávy</li>
-      <li>Fotodokumentace kontrolovaných částí</li>
-      <li>Kontrola bateriového systému (pokud je instalován)</li>
-      <li>Kontrola regulací a výkonových limitů</li>
-      <li>Doporučení pro opravy a optimalizaci výkonu</li>
-    </ul>
-    <p class="vhodne">Vhodné pro pojišťovny, prodej nemovitosti a firemní zákazníky.</p>
-  </div>
-
-  <h2>🟥 Cestovné</h2>
-  <p>12 Kč / km (počítáno z Varnsdorfu)</p>
-
-  <h2>🟧 Doplňkové služby</h2>
-  <table>
-    <tr><td>Výměna konektoru MC4</td><td>150 Kč / ks</td></tr>
-    <tr><td>Výměna pojistky</td><td>120 Kč / ks</td></tr>
-    <tr><td>Čištění panelů</td><td>25 Kč / m²</td></tr>
-    <tr><td>Kontrola bateriového systému</td><td>1 200 Kč</td></tr>
-    <tr><td>Aktualizace firmware střídače</td><td>500 Kč</td></tr>
-    <tr><td>Nouzový výjezd do 24 h</td><td>1 500 Kč</td></tr>
-    <tr><td>Diagnostika závady bez opravy</td><td>900 Kč</td></tr>
-    <tr><td>Oprava kabeláže</td><td>300–600 Kč / m</td></tr>
-  </table>
-
-  <p class="poznamka">
-    Servisní prohlídku doporučujeme provádět 1× ročně, ideálně před sezónou.  
-    Všechny ceny jsou uvedeny včetně DPH.
-  </p>
-
-  <div class="kontakt">
-    <h2>📞 Kontakt</h2>
-    <p>
-      IČO: 11700971<br>
-      E-mail: <a href="mailto:info@akelektroinstalace.cz">info@akelektroinstalace.cz</a><br>
-      Telefon: <a href="tel:+420775071401">775 071 401</a><br>
-      Web: <a href="https://akelektroinstalace.cz">akelektroinstalace.cz</a>
-    </p>
-  </div>
-</section>
-
+    <script>
+        // Funkce pro otevření modálního okna
+        function openModal(modalId) {
+            document.getElementById('modal-' + modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Zabrání scrollování pozadí
+        }
+        
+        // Funkce pro zavření modálního okna
+        function closeModal(modalId) {
+            document.getElementById('modal-' + modalId).style.display = 'none';
+            document.body.style.overflow = 'auto'; // Obnoví scrollování
+        }
+        
+        // Zavření modálního okna kliknutím mimo obsah
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Animace při načtení stránky
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.facebook-post').style.opacity = '0';
+            document.querySelector('.facebook-post').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.facebook-post').style.transition = 'opacity 0.8s, transform 0.8s';
+                document.querySelector('.facebook-post').style.opacity = '1';
+                document.querySelector('.facebook-post').style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Přidání interaktivity pro balíčky
+            document.querySelectorAll('.package').forEach(package => {
+                package.addEventListener('click', function() {
+                    // Odstraní aktivní třídu ze všech balíčků
+                    document.querySelectorAll('.package').forEach(p => {
+                        p.style.transform = 'translateY(0)';
+                        p.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.08)';
+                    });
+                    
+                    // Zvýrazní aktuální balíček
+                    this.style.transform = 'translateY(-15px)';
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.2)';
+                    
+                    // Po 1 sekundě vrátí do původního stavu
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-10px)';
+                        this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)';
+                    }, 1000);
+                });
+            });
+        });
+        
+        // Klávesa ESC zavře modální okno
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
 </body>
 </html>
