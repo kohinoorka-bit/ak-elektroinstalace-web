@@ -132,6 +132,11 @@
             background: linear-gradient(to bottom, #fffbf0, #fef5e7);
         }
         
+        .package-special {
+            border-top: 8px solid #e74c3c;
+            background: linear-gradient(to bottom, #fff8f7, #fdecea);
+        }
+        
         .package-header {
             display: flex;
             justify-content: space-between;
@@ -161,6 +166,15 @@
         
         .package-complete .package-price {
             color: #d35400;
+        }
+        
+        .package-special .package-price {
+            color: #c0392b;
+        }
+        
+        .package-description {
+            margin: -10px 0 15px;
+            font-weight: 600;
         }
         
         .features {
@@ -193,6 +207,12 @@
         
         .package-complete .feature-icon {
             color: #f39c12;
+        }
+        
+        .package-special .feature-icon,
+        .modal-special .feature-icon,
+        .modal-special .modal-icon {
+            color: #e74c3c;
         }
         
         .cta-button {
@@ -501,6 +521,24 @@
                     <li><span class="feature-icon">🖱️</span> <strong>Klikněte pro detail</strong></li>
                 </ul>
             </div>
+            
+            <div class="package package-special" onclick="openModal('special')">
+                <div class="package-header">
+                    <h2 class="package-name">MIMOŘÁDNÁ NABÍDKA</h2>
+                    <div class="package-price">1 800 Kč</div>
+                </div>
+                <p class="package-description">Servis FVE ohřev bojleru</p>
+                <ul class="features">
+                    <li><span class="feature-icon">✓</span> Kontrola panelů a konstrukce</li>
+                    <li><span class="feature-icon">✓</span> Kontrola kabeláže a konektorů MC4</li>
+                    <li><span class="feature-icon">✓</span> Kontrola DC/AC rozvaděčů</li>
+                    <li><span class="feature-icon">✓</span> Kontrola střídače</li>
+                    <li><span class="feature-icon">✓</span> Kontrola přepěťových ochran</li>
+                    <li><span class="feature-icon">✓</span> Dotažení spojů</li>
+                    <li><span class="feature-icon">✓</span> Základní měření stringů</li>
+                    <li><span class="feature-icon">🖱️</span> <strong>Klikněte pro detail</strong></li>
+                </ul>
+            </div>
         </div>
         
         <div class="note">
@@ -612,6 +650,24 @@
                 <div class="highlight-title">Pro koho je tento balíček vhodný?</div>
                 <p>Pro majitele FVE s bateriovým úložištěm nebo pro ty, kteří chtějí mít kompletní dokumentaci a optimalizaci svého systému.</p>
             </div>
+        </div>
+    </div>
+    
+    <div id="modal-special" class="modal modal-special">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('special')">&times;</button>
+            <div class="modal-icon">🟥</div>
+            <h2 class="modal-title">MIMOŘÁDNÁ NABÍDKA - 1 800 Kč</h2>
+            <p>Servis FVE ohřev bojleru zahrnuje tyto kontroly:</p>
+            <ul class="features">
+                <li><span class="feature-icon">✓</span> Kontrola panelů a konstrukce</li>
+                <li><span class="feature-icon">✓</span> Kontrola kabeláže a konektorů MC4</li>
+                <li><span class="feature-icon">✓</span> Kontrola DC/AC rozvaděčů</li>
+                <li><span class="feature-icon">✓</span> Kontrola střídače</li>
+                <li><span class="feature-icon">✓</span> Kontrola přepěťových ochran</li>
+                <li><span class="feature-icon">✓</span> Dotažení spojů</li>
+                <li><span class="feature-icon">✓</span> Základní měření stringů</li>
+            </ul>
         </div>
     </div>
     
